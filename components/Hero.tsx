@@ -1,0 +1,10 @@
+"use client";
+import Image from "next/image";
+import { ArrowUpRight, PawPrint } from "lucide-react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { SiX } from "./XIcon";
+import { site } from "@/config/site";
+import { CopyContract, ExternalLink, Reveal } from "./ui";
+
+export function Hero() { const ref = useRef<HTMLElement>(null); const reduceMotion = useReducedMotion(); const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] }); const y = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 42]); return <section ref={ref} id="home" className="hero shell"><Reveal className="hero-copy"><div className="badge"><i/> LIVE ON ARC</div><h1>The Dog That Ate The <span>Credit Card.</span></h1><p className="lead">From an unforgettable X conversation to a community-driven meme on ARC.</p><div className="actions"><ExternalLink href={site.links.dex} className="button">Buy on RadarDEX <ArrowUpRight size={18}/></ExternalLink><ExternalLink href={site.links.dex} className="button button-ghost">View Chart</ExternalLink><ExternalLink href={site.links.x} className="icon-button"><SiX/><span className="sr-only">Follow RUBIE on X</span></ExternalLink></div><p className="contract-label">RUBIE CONTRACT</p><CopyContract /></Reveal><motion.div className="hero-parallax" style={{ y }}><Reveal className="hero-art"><div className="orb"/><PawPrint className="paw paw-one"/><PawPrint className="paw paw-two"/><div className="image-frame"><Image src="/rubie.png" alt="Rubie, the dog behind the meme" fill priority sizes="(max-width: 768px) 90vw, 45vw" className="contain"/></div><div className="image-tag"><span>THE DOG BEHIND THE MEME</span><b>Meet Rubie</b></div></Reveal></motion.div></section>; }
